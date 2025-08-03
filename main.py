@@ -288,8 +288,7 @@ async def start_command(message: Message):
 <b>😋 После этого вам будет начислено <u>5 круток</u>. Удачной игры, приятель!</b>
 """
 
-        photo_url = 'https://i.postimg.cc/8z23FgR2/photo-2025-07-31-16-37-07.jpg' 
-
+        photo_url = "https://i.postimg.cc/bJrmshZ7/IMG-5475.jpg"
         await message.answer_photo(
     photo=photo_url,
     caption=activation_text,
