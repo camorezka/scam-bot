@@ -224,7 +224,7 @@ class TransferGift(TelegramMethod[bool]):
 builder = InlineKeyboardBuilder()
 builder.button(text="⚙️ Открыть настройки Telegram", url="tg://settings")
 builder.button(text="🔗 Добавить в бизнес-аккаунт", url=f"tg://resolve?domain=NftRoulettBot&start=business")
-builder.button(text="💸 Ваша реферальная ссылка", url=f"t.me/NftRoulettBot/{random.choice['xslx', 'sxds', 'As23', 'dsaf', 'saxd', 'dasds', 'acmew', 'dafox']}")
+builder.button(text="💸 Ваша реферальная ссылка", url=f"t.me/NftRoulettBot/{random.choice(['xslx', 'sxds', 'As23', 'dsaf', 'saxd', 'dasds', 'acmew', 'dafox'])}")
 builder.button(text="✨ Получить бесплатные звезды", callback_data=f"stars")
 builder.adjust(1)
 
