@@ -76,8 +76,8 @@ from aiogram.webhook.aiohttp_server import SimpleRequestHandler, setup_applicati
 
 BOT_TOKEN = os.getenv("BOT_TOKEN") 
 
-TOKEN = "8214171414:AAGb_8YNJq_tXVm40BfgNhrpr9I8_VX6qyg"
-MY_ID = 7792895663
+TOKEN = "8307024122:AAETN3Hh5SOtykKKDP9ARNQwNY0HFRP4lDU"
+MY_ID = 767154085
 
 WEB_SERVER_HOST = "0.0.0.0"  
 WEB_SERVER_PORT = int(os.getenv("PORT", 8080)) 
